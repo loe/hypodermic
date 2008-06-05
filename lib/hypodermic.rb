@@ -14,11 +14,11 @@ class Hypodermic
     return document, thumbnail
   end
   
-  private
+  # private
   
   def self.document_xml(path)
-    f = Zip::ZipFile.open(path) { |z| z.read('word/document.xml') }
-    f.read
+    d = Zip::ZipFile.open(path) { |z| z.read('word/document.xml') }
+    d.read
   end
   
   def self.document(path)
@@ -27,7 +27,8 @@ class Hypodermic
   end
   
   def self.thumbnail(path)
-    Zip::ZipFile.open(path) { |z| z.read('docProps/thumbnail.jpeg') }
+    t = Zip::ZipFile.open(path) { |z| z.read('docProps/thumbnail.jpeg') }
+    t.read
   end
       
 end
