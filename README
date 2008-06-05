@@ -1,1 +1,5 @@
-Unzips a .docx file and returns the jpeg thumbnail and plain text of the document.
+Opens a .docx file and returns a plain text string of the contents and optionally returns the thumbnail.
+
+include 'hypodermic'
+
+doc, thumbnail = Hypodermic.extract('path/to/document', :thumbnail => true)
