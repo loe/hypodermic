@@ -2,7 +2,7 @@ require File.expand_path("#{File.dirname(__FILE__)}/../helper")
 
 module HypodermicSpecHelper
   def stub_document
-    @path = File.expand_path("#{File.dirname(__FILE__)}/document.xml")
+    @path = File.expand_path("#{File.dirname(__FILE__)}/foo/word/document.xml")
     @mockument = File.open(@path)
     Zip::ZipFile.stub!(:open).and_return(@mockument)
   end
