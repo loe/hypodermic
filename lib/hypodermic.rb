@@ -34,7 +34,7 @@ class Hypodermic
     return document, thumbnail
   end
   
-  # private
+  private
   
   def self.document_xml(path)
     d = Zip::ZipFile.open(path) { |z| z.read('word/document.xml') }
