@@ -4,11 +4,11 @@ include 'hypodermic'
 
 doc, thumbnail = Hypodermic.extract('path/to/document', :thumbnail => true)
 
-Author:: W. Andrew Loe II (<loe@onehub.com>)
-Moral Support:: Leigh Caplan (<lcaplan@onehub.com>)
+W. Andrew Loe II (<loe@onehub.com>)
+Leigh Caplan (<lcaplan@onehub.com>)
 
-Copyright:: Copyright (c) 2008 Onehub, Inc.
-License:: GNU General Public License version 2 or later
+Copyright (c) 2008 Onehub, Inc.
+GNU General Public License version 2 or later
 
 This program and entire repository is free software; you can
 redistribute it and/or modify it under the terms of the GNU 
