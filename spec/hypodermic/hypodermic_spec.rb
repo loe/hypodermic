@@ -1,16 +1,28 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../helper")
 
 module HypodermicSpecHelper
-  def stub_document
-    @document_path = File.expand_path("#{File.dirname(__FILE__)}/foo/word/document.xml")
-    @mockument = File.open(@document_path)
-    Zip::ZipFile.stub!(:open).and_return(@mockument)
+  def stub_word_document
+    @word_document_path = File.expand_path("#{File.dirname(__FILE__)}/foo.docx/word/document.xml")
+    @word_document = File.open(@word_document_path)
+    Zip::ZipFile.stub!(:open).and_return(@word_document)
+  end
+  
+  def stub_excel_document
+    @excel_document_path = File.expand_path("#{File.dirname(__FILE__)}/foo.xlsx/xl/sharedStrings.xml")
+    @excel_document = File.open(@excel_document_path)
+    Zip::ZipInputStream.stub(:open).and_return(@excel_document)
+  end
+  
+  def stub_powerpoint_document
+    @powerpoint_document_path = File.expand_path("#{File.dirname(__FILE__)}/foo.pptx/ppt/presentation.xml")
+    @powerpoint_document = File.open(@powerpoint_document_path)
+    Zip::ZipInputStream.stub(:open).and_return(@powerpoint_document)
   end
   
   def stub_thumbnail
-    @thumbnail_path = File.expand_path("#{File.dirname(__FILE__)}/foo/docProps/thumbnail.jpeg")
-    @mocknail = File.open(@thumbnail_path)
-    Zip::ZipFile.stub!(:open).and_return(@mocknail)
+    @thumbnail_path = File.expand_path("#{File.dirname(__FILE__)}/w/docProps/thumbnail.jpeg")
+    @thumbnail = File.open(@thumbnail_path)
+    Zip::ZipFile.stub!(:open).and_return(@thumbnail)
   end
 end
  
@@ -19,7 +31,7 @@ describe Hypodermic do
   
   describe ".extract" do
     before(:each) do
-      stub_document
+      stub_word_document
     end
     
     it "should not raise an error if you pass a path" do
@@ -32,9 +44,9 @@ describe Hypodermic do
     
   end  
   
-  describe ".document_xml" do
+  describe ".xml_from_word" do
     before(:each) do
-      stub_document
+      stub_word_document
     end
     
     it "should not raise an error, given a path argument" do
@@ -49,7 +61,7 @@ describe Hypodermic do
   
   describe ".document" do
     before(:each) do
-      stub_document
+      stub_word_document
     end
     
     it "should not raise an error" do
@@ -58,7 +70,7 @@ describe Hypodermic do
     
     it "should return the file without tags" do
       result = Hypodermic.send(:document, "path")
-      result.should == File.read(@document_path).gsub(/<.*?>/, ' ')
+      result.should == File.read(@word_document_path).gsub(/<.*?>/, ' ')
     end
   end
   

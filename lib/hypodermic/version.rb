@@ -1,3 +1,3 @@
-module Pastejour
-  VERSION = '0.0.1'
+module Hypodermic
+  VERSION = '0.0.2'
 end
