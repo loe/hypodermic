@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'zip/zip'
-require 'hypodermic/version'
+File.expand_path("#{File.dirname(__FILE__)}/version")
 
 class Hypodermic
 
