@@ -38,15 +38,29 @@ class Hypodermic
   end
   
   def self.xml_from_word(path)
-    Zip::ZipFile.open(path) { |z| z.read('word/document.xml') }
+    Zip::ZipFile.open(path) do |z|
+      z.read('word/document.xml')
+    end
   end
   
   def self.xml_from_excel(path)
-    Zip::ZipInputStream::open(path) { |io| while(entry = io.get_next_entry); xml = io.read if entry.name =~ /(xl\/worksheets\/)|(xl\/sharedStrings.xml)/; end; xml }      
+    Zip::ZipInputStream::open(path) do |io|
+      xml = ''
+      while(entry = io.get_next_entry)
+        xml << io.read if entry.name =~ /(xl\/worksheets)|(sharedStrings.xml)/
+      end
+      xml
+    end      
   end
   
   def self.xml_from_powerpoint(path)
-    Zip::ZipInputStream::open(path) { |io| while(entry = io.get_next_entry); xml = io.read if entry.name =~ /(ppt\/slides\/)|(ppt\/presentation.xml)/; end; xml }
+    Zip::ZipInputStream::open(path) do |io|
+      xml = ''
+      while(entry = io.get_next_entry)
+        xml << io.read if entry.name =~ /(ppt\/slides)|(presentation.xml)/
+      end
+      xml
+    end
   end
   
   def self.thumbnail(path)
