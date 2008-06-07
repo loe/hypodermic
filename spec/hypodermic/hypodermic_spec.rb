@@ -35,29 +35,14 @@ describe Hypodermic do
     end
     
     it "should not raise an error if you pass a path" do
-      lambda { Hypodermic.extract("path") }.should_not raise_error
+      lambda { Hypodermic.extract("path.docx",) }.should_not raise_error
     end
     
     it "should not raise an error if you also want a thumbnail" do
-      lambda { Hypodermic.extract("path", :thumbnail => true) }.should_not raise_error
+      lambda { Hypodermic.extract("path.docx", :thumbnail => true) }.should_not raise_error
     end
     
   end  
-  
-  describe ".xml_from_word" do
-    before(:each) do
-      stub_word_document
-    end
-    
-    it "should not raise an error, given a path argument" do
-      lambda { Hypodermic.send(:document_xml, "path") }.should_not raise_error
-    end
-    
-    it "should return the document.xml" do
-      result = Hypodermic.send(:document_xml, "path")
-      result.should == File.read(@document_path)
-    end
-  end
   
   describe ".document" do
     before(:each) do
@@ -65,11 +50,11 @@ describe Hypodermic do
     end
     
     it "should not raise an error" do
-      lambda { Hypodermic.send(:document, "path") }.should_not raise_error
+      lambda { Hypodermic.send(:document, "path.docx") }.should_not raise_error
     end
     
     it "should return the file without tags" do
-      result = Hypodermic.send(:document, "path")
+      result = Hypodermic.send(:document, "path.docx")
       result.should == File.read(@word_document_path).gsub(/<.*?>/, ' ')
     end
   end
@@ -80,12 +65,27 @@ describe Hypodermic do
     end
     
     it "should not raise an error, given the path argument" do
-      lambda { Hypodermic.send(:thumbnail, "path") }
+      lambda { Hypodermic.send(:thumbnail, "path.docx") }
     end
     
     it "should return thumbnail.jpeg" do
-      result = Hypodermic.send(:thumbnail, "path")
+      result = Hypodermic.send(:thumbnail, "path.docx")
       result.should == File.read(@thumbnail_path)
+    end
+  end
+  
+  describe ".xml_from_word" do
+    before(:each) do
+      stub_word_document
+    end
+    
+    it "should not raise an error, given a path argument" do
+      lambda { Hypodermic.send(:xml_from_word, "path.docx") }.should_not raise_error
+    end
+    
+    it "should return the document.xml" do
+      result = Hypodermic.send(:xml_from_word, "path.docx")
+      result.should == File.read(@word_document_path)
     end
   end
   
