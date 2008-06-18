@@ -4,7 +4,7 @@ include 'hypodermic'
 
 doc, thumbnail = Hypodermic.extract('path/to/document', :thumbnail => true)
 
-W. Andrew Loe II (<loe@onehub.com>)
+W. Andrew Loe III (<loe@onehub.com>)
 Leigh Caplan (<lcaplan@onehub.com>)
 
 Copyright (c) 2008 Onehub, Inc.
